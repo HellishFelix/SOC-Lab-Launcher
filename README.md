@@ -179,7 +179,7 @@ Started: Obsidian.exe
 Started: chrome.exe
 Opened: http://localhost:8000
 
-SOC Lab готов за 0.59 секунды
+SOC Lab Ready in 0.59 seconds
 ```
 
 ### Примечание
