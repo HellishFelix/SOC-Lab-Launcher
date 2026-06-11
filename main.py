@@ -20,6 +20,10 @@ from ui import(
     print_ready
 )
 
+from network_checker import check_warp
+
+check_warp()
+
 print_banner()
 
 start_time = time.time()
