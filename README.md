@@ -1,52 +1,96 @@
 # SOC Lab Launcher
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Windows](https://img.shields.io/badge/Platform-Windows-blue)
+![Vosk](https://img.shields.io/badge/Speech-Vosk-green)
+![VirtualBox](https://img.shields.io/badge/VirtualBox-Automation-orange)
+![Splunk](https://img.shields.io/badge/Splunk-SIEM-success)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## 🇬🇧 English
+> Voice-Activated SOC Lab Automation Tool
 
-SOC Lab Launcher is a Python project that automatically prepares a personal SOC (Security Operations Center) lab environment.
+Automatically launches VirtualBox VMs, applications, and Splunk with a single command or voice activation using Vosk.
 
-The launcher checks VirtualBox virtual machines, starts them if needed, launches selected applications, opens Splunk Web, and writes activity logs.
+---
 
-### Features
+🇬🇧 English | [🇷🇺 Русский](#-русский)
 
-* Check VirtualBox VM status
-* Start virtual machines automatically
-* Launch desktop applications
-* Open Splunk Web interface
-* Activity logging
-* Startup time measurement
-* Modular project structure
+---
 
-### Technologies
+## Features
 
-* Python
-* VirtualBox
-* Splunk
-* subprocess
-* logging
+- Start VirtualBox virtual machines
+- Launch required applications
+- Open Splunk dashboard automatically
+- Startup logging
+- Voice activation using Vosk
+- Configurable microphone selection
+- Lightweight and beginner-friendly codebase
 
-### Project Structure
+---
+
+## Project Structure
 
 ```text
-SOC_Lab_launcher/
+SOC-Lab-Launcher/
 │
 ├── main.py
-├── config_example.py
+├── voice_listener.py
 ├── vm_manager.py
 ├── app_launcher.py
-├── file_checker.py
 ├── logger.py
-├── ui.py
+├── config_example.py
+├── list_microphones.py
+│
+├── models/
+│   └── vosk-model-small-ru-0.22
 │
 ├── logs/
+│   └── .gitkeep
 │
 └── README.md
 ```
 
-### Quick Start
+---
 
-1. Clone the repository.
+## Requirements
 
-2. Rename:
+- Python 3.12+
+- VirtualBox
+- Splunk
+- Google Chrome
+- Vosk
+
+Install dependencies:
+
+```bash
+py -m pip install vosk sounddevice
+```
+
+---
+
+## Vosk Setup
+
+Voice activation requires a Vosk speech recognition model.
+
+Recommended model:
+
+```text
+vosk-model-small-ru-0.22
+```
+
+Download the model and place it into:
+
+```text
+SOC-Lab-Launcher/
+└── models/
+    └── vosk-model-small-ru-0.22
+```
+
+---
+
+## Configuration
+
+Rename:
 
 ```text
 config_example.py
@@ -58,89 +102,146 @@ to:
 config.py
 ```
 
-3. Open `config.py` and replace the example paths with paths from your system.
-
-Example:
+Then edit:
 
 ```python
-OBSIDIAN_PATH = r"C:\Path\To\Obsidian.exe"
-CHROME_PATH = r"C:\Path\To\chrome.exe"
-VBOXMANAGE_PATH = r"C:\Path\To\VBoxManage.exe"
+OBSIDIAN_PATH = r"PATH_TO_OBSIDIAN"
+CHROME_PATH = r"PATH_TO_CHROME"
+VBOXMANAGE_PATH = r"PATH_TO_VBOXMANAGE"
 ```
-
-4. Run:
-
-```bash
-python main.py
-```
-
-### Example Output
-
-```text
-=== HELLIX'S SOC LAB LAUNCHER ===
-
-Windows 10 is already running
-kali is already running
-Started: Obsidian.exe
-Started: chrome.exe
-Opened: http://localhost:8000
-
-SOC Lab Ready in 0.59 seconds
-```
-
-### Notes
-
-This project was created as a personal learning project for SOC analyst internship preparation and Python automation practice.
 
 ---
 
-## 🇷🇺 Русский
+## Voice Activation
 
-SOC Lab Launcher — это Python-проект для автоматической подготовки собственной лаборатории SOC (Security Operations Center).
-
-Программа проверяет виртуальные машины VirtualBox, запускает их при необходимости, открывает нужные приложения, запускает веб-интерфейс Splunk и ведёт журнал действий.
-
-### Возможности
-
-* Проверка состояния виртуальных машин VirtualBox
-* Автоматический запуск виртуальных машин
-* Запуск приложений Windows
-* Открытие веб-интерфейса Splunk
-* Ведение логов
-* Подсчёт времени запуска
-* Модульная структура проекта
-
-### Используемые технологии
-
-* Python
-* VirtualBox
-* Splunk
-* subprocess
-* logging
-
-### Структура проекта
+Default wake phrase:
 
 ```text
-SOC_Lab_launcher/
-│
-├── main.py
-├── config_example.py
-├── vm_manager.py
-├── app_launcher.py
-├── file_checker.py
-├── logger.py
-├── ui.py
-│
-├── logs/
-│
-└── README.md
+просыпайся папочка вернулся
 ```
 
-### Быстрый запуск
+Microphone configuration:
 
-1. Склонируйте репозиторий.
+```python
+MICROPHONE_ID = None
+```
 
-2. Переименуйте файл:
+To find your microphone ID:
+
+```bash
+py list_microphones.py
+```
+
+---
+
+## Quick Start
+
+Start SOC Lab manually:
+
+```bash
+py main.py
+```
+
+Start voice listener:
+
+```bash
+py voice_listener.py
+```
+
+Say:
+
+```text
+просыпайся папочка вернулся
+```
+
+SOC Lab will launch automatically.
+
+---
+
+## Example Output
+
+```text
+[VOICE] Wake phrase detected
+[VOICE] Starting SOC Lab...
+
+=== HELIX'S SOC LAB LAUNCHER ===
+
+Windows 10 is already running
+kali is already running
+
+Started: Obsidian.exe
+Started: chrome.exe
+
+Opened: http://localhost:8000
+
+SOC Lab Ready in 0.67 seconds
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+# 🇷🇺 Русский
+
+[🇬🇧 English](#soc-lab-launcher)
+
+---
+
+## Возможности
+
+- Запуск виртуальных машин VirtualBox
+- Автоматический запуск приложений
+- Автоматическое открытие Splunk
+- Ведение логов запуска
+- Голосовая активация через Vosk
+- Настройка микрофона
+- Простая структура проекта
+
+---
+
+## Требования
+
+- Python 3.12+
+- VirtualBox
+- Splunk
+- Google Chrome
+- Vosk
+
+Установка зависимостей:
+
+```bash
+py -m pip install vosk sounddevice
+```
+
+---
+
+## Настройка Vosk
+
+Для голосовой активации необходимо скачать модель Vosk.
+
+Рекомендуемая модель:
+
+```text
+vosk-model-small-ru-0.22
+```
+
+После скачивания поместите её в папку:
+
+```text
+SOC-Lab-Launcher/
+└── models/
+    └── vosk-model-small-ru-0.22
+```
+
+---
+
+## Настройка проекта
+
+Переименуйте:
 
 ```text
 config_example.py
@@ -152,36 +253,70 @@ config_example.py
 config.py
 ```
 
-3. Откройте `config.py` и замените примерные пути на пути вашей системы.
-
-Пример:
+и укажите свои пути:
 
 ```python
-OBSIDIAN_PATH = r"C:\Путь\К\Obsidian.exe"
-CHROME_PATH = r"C:\Путь\К\chrome.exe"
-VBOXMANAGE_PATH = r"C:\Путь\К\VBoxManage.exe"
+OBSIDIAN_PATH = r"PATH_TO_OBSIDIAN"
+CHROME_PATH = r"PATH_TO_CHROME"
+VBOXMANAGE_PATH = r"PATH_TO_VBOXMANAGE"
 ```
 
-4. Запустите программу:
+---
 
-```bash
-python main.py
-```
+## Голосовая активация
 
-### Пример вывода
+Фраза по умолчанию:
 
 ```text
-=== HELLIX'S SOC LAB LAUNCHER ===
-
-Windows 10 is already running
-kali is already running
-Started: Obsidian.exe
-Started: chrome.exe
-Opened: http://localhost:8000
-
-SOC Lab Ready in 0.59 seconds
+просыпайся папочка вернулся
 ```
 
-### Примечание
+Для поиска микрофона выполните:
 
-Проект создан в учебных целях для подготовки к стажировке SOC Analyst и практики автоматизации на Python.
+```bash
+py list_microphones.py
+```
+
+После этого укажите нужный ID:
+
+```python
+MICROPHONE_ID = 2
+```
+
+или используйте:
+
+```python
+MICROPHONE_ID = None
+```
+
+для микрофона по умолчанию.
+
+---
+
+## Быстрый запуск
+
+Ручной запуск:
+
+```bash
+py main.py
+```
+
+Голосовой запуск:
+
+```bash
+py voice_listener.py
+```
+
+После произнесения:
+
+```text
+просыпайся папочка вернулся
+```
+
+лаборатория будет запущена автоматически.
+
+---
+
+## Лицензия
+
+Проект распространяется по лицензии MIT.
