@@ -81,7 +81,7 @@ python main.py
 
 Windows 10 is already running
 kali is already running
-
+Started: Obsidian.exe
 Started: chrome.exe
 Opened: http://localhost:8000
 
@@ -173,11 +173,11 @@ python main.py
 ```text
 === HELLIX'S SOC LAB LAUNCHER ===
 
-Windows 10 уже запущена
-kali уже запущена
-
-Запущено: chrome.exe
-Открыт: http://localhost:8000
+Windows 10 is already running
+kali is already running
+Started: Obsidian.exe
+Started: chrome.exe
+Opened: http://localhost:8000
 
 SOC Lab готов за 0.59 секунды
 ```
