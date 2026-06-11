@@ -25,6 +25,8 @@ Automatically launches VirtualBox VMs, applications, and Splunk with a single co
 - Voice activation using Vosk
 - Configurable microphone selection
 - Lightweight and beginner-friendly codebase
+- Pre-launch environment validation
+- Cloudflare WARP detection
 
 ---
 
@@ -65,6 +67,20 @@ Install dependencies:
 ```bash
 py -m pip install vosk sounddevice
 ```
+
+---
+
+## Environment Validation
+
+Before launching the SOC Lab, the application performs environment validation checks.
+
+Current validation includes:
+
+* Cloudflare WARP detection
+* Prevention of launching Splunk in known problematic network configurations
+
+If Cloudflare WARP is detected, the launcher displays a warning message and terminates automatically.
+
 
 ---
 
@@ -200,6 +216,8 @@ This project is licensed under the MIT License.
 - Голосовая активация через Vosk
 - Настройка микрофона
 - Простая структура проекта
+- Проверка окружения перед запуском
+- Обнаружение Cloudflare WARP
 
 ---
 
@@ -216,6 +234,20 @@ This project is licensed under the MIT License.
 ```bash
 py -m pip install vosk sounddevice
 ```
+
+---
+
+## Проверка окружения
+
+Перед запуском SOC Lab приложение выполняет проверку окружения.
+
+На данный момент реализованы:
+
+* Обнаружение Cloudflare WARP
+* Предотвращение запуска Splunk в заведомо проблемной сетевой конфигурации
+
+Если обнаружен активный Cloudflare WARP, лаунчер выводит предупреждение и автоматически завершает работу.
+
 
 ---
 
