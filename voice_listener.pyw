@@ -2,6 +2,7 @@ import subprocess
 from vosk import Model, KaldiRecognizer
 import sounddevice as sd
 import json
+import time
 
 from logger import write_log
 from config import (
@@ -9,16 +10,19 @@ from config import (
     MICROPHONE_ID
 )
 
+write_log("VOICE: Listener started")
+
 MODEL_PATH = "models/vosk-model-small-ru-0.22"
 
 model = Model(MODEL_PATH)
 recognizer = KaldiRecognizer(model, 16000)
 
 print("Listening...")
-launcher_started=False
 
-def callback(indata,frames,time,status):
-    global launcher_started
+last_launch_time = 0
+
+def callback(indata, frames, callback_time, status):
+    global last_launch_time
 
     if recognizer.AcceptWaveform(bytes(indata)):
         result = json.loads(recognizer.Result())
@@ -29,9 +33,9 @@ def callback(indata,frames,time,status):
             
             if(
                 all(word in text for word in WAKE_WORDS)
-                and not launcher_started
+                and time.time() - last_launch_time > 10
             ):
-                launcher_started = True
+                last_launch_time = time.time()
 
                 print("\n[VOICE] Wake phrase detected!")
                 write_log("VOICE: Wake phrase detected!")
@@ -50,4 +54,5 @@ with sd.RawInputStream(
     channels=1,
     callback=callback
 ):
-    input("Press Enter to stop...\n")
+    while True:
+        time.sleep(1)

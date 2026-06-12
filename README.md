@@ -18,15 +18,19 @@ Automatically launches VirtualBox VMs, applications, and Splunk with a single co
 
 ## Features
 
-- Start VirtualBox virtual machines
-- Launch required applications
-- Open Splunk dashboard automatically
-- Startup logging
-- Voice activation using Vosk
-- Configurable microphone selection
-- Lightweight and beginner-friendly codebase
-- Pre-launch environment validation
-- Cloudflare WARP detection
+* Launch VirtualBox virtual machines automatically
+* Launch required applications automatically
+* Open Splunk dashboard in browser
+* Voice activation using Vosk speech recognition
+* Configurable wake phrase
+* Configurable microphone selection
+* Background voice listener (pythonw.exe)
+* Automatic startup with Windows Task Scheduler
+* Cloudflare WARP detection before launch
+* Startup validation checks
+* Logging and event tracking
+* Lightweight modular Python architecture
+* Beginner-friendly configuration
 
 ---
 
@@ -67,6 +71,28 @@ Install dependencies:
 ```bash
 py -m pip install vosk sounddevice
 ```
+
+---
+
+## Voice Automation
+
+The project supports fully automated voice activation using Vosk.
+
+Example wake phrase:
+
+"просыпайся папочка вернулся"
+
+The voice listener runs in the background using pythonw.exe and starts automatically with Windows through Task Scheduler.
+
+Voice recognition model is not included in the repository.
+
+Download a Russian Vosk model and place it inside:
+
+models/
+
+Example:
+
+models/vosk-model-small-ru-0.22/
 
 ---
 
@@ -209,15 +235,19 @@ This project is licensed under the MIT License.
 
 ## Возможности
 
-- Запуск виртуальных машин VirtualBox
-- Автоматический запуск приложений
-- Автоматическое открытие Splunk
-- Ведение логов запуска
-- Голосовая активация через Vosk
-- Настройка микрофона
-- Простая структура проекта
-- Проверка окружения перед запуском
-- Обнаружение Cloudflare WARP
+* Автоматический запуск виртуальных машин VirtualBox
+* Автоматический запуск необходимых приложений
+* Автоматическое открытие панели Splunk
+* Голосовая активация через распознавание речи Vosk
+* Настраиваемая фраза активации
+* Выбор микрофона через конфигурационный файл
+* Фоновый голосовой слушатель (pythonw.exe)
+* Автозапуск вместе с Windows через Планировщик задач
+* Проверка Cloudflare WARP перед запуском
+* Проверка окружения перед стартом
+* Логирование действий и событий
+* Модульная архитектура на Python
+* Простая настройка для начинающих
 
 ---
 
